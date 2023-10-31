@@ -39,7 +39,7 @@ PORT=3003
 ### 3. Update a Book by ID
 
 - **HTTP Method:** POST
-- **Endpoint:** `/books/:id`
+- **Endpoint:** `/api/books/:id`
 - **Description:** Update an existing book by its unique ID.
 - **Request Parameters:** The `:id` parameter in the URL should be the unique ID of the book to be updated.
 - **Request Body:** JSON object representing the updated book data.
@@ -48,7 +48,7 @@ PORT=3003
 ### 4. Get a Single Book by ID
 
 - **HTTP Method:** GET
-- **Endpoint:** `/:id`
+- **Endpoint:** `/api/books/:id`
 - **Description:** Retrieve a single book from the database by its unique ID.
 - **Request Parameters:** The `:id` parameter in the URL should be the unique ID of the book to retrieve.
 - **Response:** The book as a JSON object.
