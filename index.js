@@ -60,7 +60,7 @@ app.get('/api/books', async (req, res) => {
 
 
 // Update a book by ID
-app.post('/books/:id', async (req, res) => {
+app.post('/api/books/:id', async (req, res) => {
   const { id } = req.params;
   console.log(id);
   const updatedBookData = req.body;
@@ -82,7 +82,7 @@ app.post('/books/:id', async (req, res) => {
 });
 
 // Route to get a single book by ID
-app.get('/:id', async (req, res) => {
+app.get('/api/books/:id', async (req, res) => {
   console.log(req.params)
   const { id } = req.params;
   console.log(req.params)
