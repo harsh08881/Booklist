@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Book Data</title>
+</head>
+<body>
+
+<h1>Update Book Data</h1>
+
+<form id="updateForm">
+  <label for="bookId">Book ID:</label>
+  <input type="text" id="bookId" name="bookId" required>
+  <button type="button" onclick="fetchBookData()">Fetch Data</button>
+
+  <div id="bookData" style="display: none;">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required>
+    
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author" required>
+    
+    <label for="summary">Summary:</label>
+    <textarea id="summary" name="summary" required></textarea>
+    
+    <label for="photo">Photo:</label>
+    <input type="text" id="photo" name="photo" required>
+    
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" required>
+    
+    <label for="publicationYear">Publication Year:</label>
+    <input type="number" id="publicationYear" name="publicationYear" required>
+    
+    <label for="publisherName">Publisher Name:</label>
+    <input type="text" id="publisherName" name="publisherName" required>
+    
+    <label for="rating">Rating:</label>
+    <input type="number" id="rating" name="rating" required>
+    
+    <button type="button" onclick="updateBookData()">Update Data</button>
+  </div>
+</form>
+
+<script>
+  // Function to fetch book data by ID
+  function fetchBookData() {
+    const bookId = document.getElementById("bookId").value;
+    
+    // Replace the following with your API endpoint to fetch book data by ID
+    fetch(`YOUR_API_ENDPOINT/${bookId}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          const bookData = document.getElementById("bookData");
+          bookData.style.display = "block";
+          document.getElementById("title").value = data.title;
+          document.getElementById("author").value = data.author;
+          document.getElementById("summary").value = data.summary;
+          document.getElementById("photo").value = data.photo;
+          document.getElementById("price").value = data.price;
+          document.getElementById("publicationYear").value = data.publicationYear;
+          document.getElementById("publisherName").value = data.publisherName;
+          document.getElementById("rating").value = data.rating;
+        } else {
+          alert("Book not found.");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching book data:", error);
+      });
+  }
+
+  // Function to update book data
+  function updateBookData() {
+    const bookId = document.getElementById("bookId").value;
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const summary = document.getElementById("summary").value;
+    const photo = document.getElementById("photo").value;
+    const price = document.getElementById("price").value;
+    const publicationYear = document.getElementById("publicationYear").value;
+    const publisherName = document.getElementById("publisherName").value;
+    const rating = document.getElementById("rating").value;
+    
+    // Create an object with the updated data
+    const updatedData = {
+      title,
+      author,
+      summary,
+      photo,
+      price,
+      publicationYear,
+      publisherName,
+      rating,
+    };
+
+    // Replace the following with your API endpoint to update book data
+    fetch(`YOUR_API_ENDPOINT/${bookId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert("Book data updated successfully.");
+      })
+      .catch(error => {
+        console.error("Error updating book data:", error);
+      });
+  }
+</script>
+
+</body>
+</html>
