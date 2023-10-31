@@ -17,6 +17,12 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
+
+app.get('/',(req,res)=>{
+  res.send('Hello World');
+})
+
+
   // Route to add a new book
 app.post('/api/books', async (req, res) => {
   console.log(req.body);
