@@ -7,6 +7,7 @@ const Book = require('./modal/bookschema');
 const cors = require('cors')
 const fs = require('fs');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 // Establish DataBase Connection
 connectDB();
@@ -14,28 +15,14 @@ connectDB();
 app.use(cors());
 
 
-
-app.get('/', (req, res) => {
-  const filePath = path.join(__dirname, 'index.html');
-
-  // Check if the file exists
-  if (fs.existsSync(filePath)) {
-    // Read the HTML file and send it as a response
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    res.send(fileContent);
-  } else {
-    res.status(404).send('File not found');
-  }
-});
-
-
-
-
+app.use(bodyParser.json());
 
   // Route to add a new book
 app.post('/api/books', async (req, res) => {
+  console.log(req.body);
   try {
     const newBookData = req.body;
+    // console.log(req.body);
 
     // Create a new book instance using the Book model
     const newBook = new Book(newBookData);
@@ -67,9 +54,11 @@ app.get('/api/books', async (req, res) => {
 
 
 // Update a book by ID
-app.put('/books/:id', async (req, res) => {
+app.post('/books/:id', async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   const updatedBookData = req.body;
+  console.log(req.body);
 
   try {
     // Find the book by ID and update it
@@ -88,7 +77,9 @@ app.put('/books/:id', async (req, res) => {
 
 // Route to get a single book by ID
 app.get('/:id', async (req, res) => {
+  console.log(req.params)
   const { id } = req.params;
+  console.log(req.params)
 
   try {
     // Find the book by ID in the database
